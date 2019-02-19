@@ -90,7 +90,9 @@
 <!-- like -->
 <span>like : </span>
 <input #like placeholder="like 검색" />&nbsp; <button type="button" (click)="findByNameLike(like.value)">검색</button>
+&nbsp; <span>findByNameLike(String searchTerm) : 완전 같아야</span>
 <br>
+<!-- 	List<User> findByNameLike(String searchTerm); -->
 
 <!-- containing -->
 <span>containing : </span>
@@ -158,7 +160,7 @@
       <td>{{i+1}}</td>
       <td>{{ user.id }}</td>
       <td>
-        <a>{{user.name}}</a>
+        <a [routerLink]="['/user/detail', user.id]">{{user.name}}</a>
       </td>
       <td>{{ user.salary }}</td>
       <td>{{ user.status }}</td>

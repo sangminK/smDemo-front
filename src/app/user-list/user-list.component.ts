@@ -18,9 +18,15 @@ export class UserListComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
+  connectTest(password: string, userId: string) {
+    this.userService.connectTest(password, userId)
+  
+  }
+
   ngOnInit() {
-    this.getUsers();
+   // this.getUsers();
     //this.getUser(19);
+    this.connectTest('aaa','aaa');
   }
 
   getUser(id: number) {
