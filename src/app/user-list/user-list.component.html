@@ -1,0 +1,172 @@
+<button type="button" routerLink="/user/add">USER ADD</button>
+<hr>
+<h3>검색</h3>
+
+<button (click)="getUsers()">검색 초기화</button>
+<br><br>
+
+<!-- 키워드 검색 -->
+<span>name 검색 : </span>
+<input #keyword placeholder="name 검색" />&nbsp; <button type="button" (click)="searchKeyword(keyword.value)">검색</button>
+<br><br>
+
+<!-- salary 검색 -->
+<span>salary 검색 : </span>
+<select  #salary1>
+  <option value="1000">1000</option>
+  <option value="2000">2000</option>
+  <option value="3000">3000</option>
+  <option value="4000">4000</option>
+  <option value="5000">5000</option>
+</select> &nbsp;
+
+<select #order1>
+  <option value="1">이름 오름차순</option>
+  <option value="2">이름 내림차순</option>
+</select>  &nbsp;
+
+<button type="button" (click)="findBySalaryOrderByName(salary1.value, order1.value)">검색</button>
+<br>
+
+<!-- status 검색 -->
+<span>status 검색 : </span>
+<select #status1>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+</select>  &nbsp;
+
+<select #order2>
+  <option value="1">이름 오름차순</option>
+  <option value="2">이름 내림차순</option>
+</select> &nbsp;
+
+<button type="button" (click)="findByStatusOrderByName(status1.value, order2.value)">검색</button>
+<br>
+
+<!-- salary 이상/이하 검색 -->
+<span>salary 이상/이하 검색 : </span>
+<select  #salary2>
+  <option value="1000">1000</option>
+  <option value="2000">2000</option>
+  <option value="3000">3000</option>
+  <option value="4000">4000</option>
+  <option value="5000">5000</option>
+</select> &nbsp;
+
+<select #greater>
+  <option value="1">이상</option>
+  <option value="2">이하</option>
+</select> &nbsp;
+
+<button type="button" (click)="salaryGreaterLess(salary2.value, greater.value)">검색</button>
+<br>
+
+<!-- salary 범위 검색 -->
+<span>salary 범위 검색 : </span>
+<select  #left>
+  <option value="1000">1000</option>
+  <option value="2000">2000</option>
+  <option value="3000">3000</option>
+  <option value="4000">4000</option>
+  <option value="5000">5000</option>
+</select> &nbsp;
+<span> &lt; salary &lt; </span> 
+<select #right>
+  <option value="1000">1000</option>
+  <option value="2000">2000</option>
+  <option value="3000">3000</option>
+  <option value="4000">4000</option>
+  <option value="5000">5000</option>
+</select> &nbsp; 
+
+<button type="button" (click)="salaryBetween(left.value, right.value)">검색</button>
+<br><br>
+
+
+<!-- like -->
+<span>like : </span>
+<input #like placeholder="like 검색" />&nbsp; <button type="button" (click)="findByNameLike(like.value)">검색</button>
+<br>
+
+<!-- containing -->
+<span>containing : </span>
+<input #containing placeholder="containing 검색" />&nbsp; <button type="button" (click)="getByNameContaining(containing.value)">검색</button>
+<br>
+
+<!-- startingWith -->
+<span>startingWith : </span>
+<input #starting placeholder="startingWith 검색" />&nbsp; <button type="button" (click)="readByNameStartingWith(starting.value)">검색</button>
+<br>
+
+<!-- like Query -->
+<span>like @Query : </span>
+<input #likeQ placeholder="검색어로 시작하는 단어" />&nbsp; <button type="button" (click)="findByNameLikeQuery(likeQ.value)">검색</button>
+
+<!-- ---------------------------------------------------------------------- -->
+<hr>
+
+<!-- <h4>
+  USER LIST
+</h4>
+
+<table border="1">
+  <tr>
+    <td>ID</td>
+    <td>name</td>
+    <td>salary</td>
+    <td>status</td>
+    <td>가입일</td>
+    <td>정보수정일</td>
+    <td>삭제</td>
+  </tr>
+  <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>
+          <a [routerLink]="['/user/detail', user.id]">{{user.name}}</a>
+        </td>
+    <td>{{ user.salary }}</td>
+    <td>{{ user.status }}</td>
+    <td>{{ user.createdDate }}</td>
+    <td>{{ user.modifiedDate }}</td>
+    <td><button type="button" (click)="deleteUser(user.id)">X</button></td>
+  </tr>
+</table> -->
+
+<br>
+
+
+<!-- paging -->
+<div>
+
+  <table border='1'>
+    <tr>
+      <td>번호</td>
+      <td>ID</td>
+      <td>name</td>
+      <td>salary</td>
+      <td>status</td>
+      <td>가입일</td>
+      <td>정보수정일</td>
+      <td>삭제</td>
+    </tr>
+
+    <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p, id: 'table' }; let i=index">
+      <td>{{i+1}}</td>
+      <td>{{ user.id }}</td>
+      <td>
+        <a>{{user.name}}</a>
+      </td>
+      <td>{{ user.salary }}</td>
+      <td>{{ user.status }}</td>
+      <td>{{ user.createdDate }}</td>
+      <td>{{ user.modifiedDate }}</td>
+      <td><button type="button" (click)="deleteUser(user.id)">X</button></td>
+    </tr>
+  </table>
+
+  <pagination-controls (pageChange)="p = $event" id='table'></pagination-controls>
+
+</div>

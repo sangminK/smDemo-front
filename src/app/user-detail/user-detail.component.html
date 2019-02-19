@@ -1,0 +1,18 @@
+<h4>
+  USER DETAIL
+</h4>
+<div *ngIf="user">
+  <ul>
+    <li>id : {{user.id}}</li>
+    <li>name : <input type="text" #newName value={{user.name}} /> </li>
+    <li>salary : <input type="number" #newSalary value={{user.salary}} /> </li>
+    <li>status : <input type="number" #newStatus value={{user.status}} /> </li>
+    <li>createdDate : {{user.createdDate}}</li>
+    <li>modifiedDate : {{user.modifiedDate}}</li>
+  </ul>
+  
+  
+  <button type="button" (click)="goBack()">목록으로</button>
+  <button type="button" (click)="deleteUser(user.id)">삭제</button>
+  <button type="button" (click)="updateUser(user.id, newName.value, newSalary.value, newStatus.value)">수정</button>
+</div>
