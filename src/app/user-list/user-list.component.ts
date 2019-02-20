@@ -18,16 +18,58 @@ export class UserListComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  connectTest(password: string, userId: string) {
-    this.userService.connectTest(password, userId)
-  
-  }
+  password: string;
+  userId: string;
 
   ngOnInit() {
-   // this.getUsers();
-    //this.getUser(19);
-    this.connectTest('aaa','aaa');
+
+    // this.password = "12234";
+    // this.userId = "momomo808";
+    
+
+    this.login("12234",  "momomo808");
+    this.getUserInfo(1);
+    this.getUserInfoParam(1);
+
+    this.deleteUserApi(0);
+    this.registUser("sm","sm","sm","sm",11);
+    this.searchUser("sm","sm","sm","sm",11);
+    this.updateUser("sm","sm","sm","sm",11);
   }
+
+  // auth-controller
+  login(password: string, userId: string) {
+    this.userService.login(password, userId)
+  }
+
+  getUserInfo(userNo: number) {
+    this.userService.getUserInfo(userNo)
+  }
+
+  getUserInfoParam(userNo: number) {
+    this.userService.getUserInfoParam(userNo)
+  }
+
+
+  // sample-controller
+  deleteUserApi(userNo: number) {
+    this.userService.deleteUserApi(userNo)
+  }
+
+  registUser(email: string, password: string, userId: string, userName: string, userNo: number) {
+    this.userService.registUser(email, password, userId, userName, userNo)
+  }
+  searchUser(email: string, password: string, userId: string, userName: string, userNo: number) {
+    this.userService.searchUser(email, password, userId, userName, userNo)
+  }
+
+  updateUser(email: string, password: string, userId: string, userName: string, userNo: number) {
+    this.userService.updateUser(email, password, userId, userName, userNo)
+  }
+
+
+
+  ///////////////////////////////////////////////////////
 
   getUser(id: number) {
     this.userService.getUser(id)
